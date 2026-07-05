@@ -19,9 +19,4 @@ copy_from_home "$HOME/.config/dotfiles/themes/oh-my-posh.json" "$repo_root/theme
 copy_from_home "$HOME/.ssh/config" "$repo_root/ssh/config"
 copy_from_home "$HOME/.config/ghostty/config" "$repo_root/ghostty/config"
 copy_from_home "$HOME/.config/cmux/cmux.json" "$repo_root/cmux/cmux.json"
-
-if [[ -f "$HOME/AGENTS.md" ]]; then
-  copy_from_home "$HOME/AGENTS.md" "$repo_root/AGENTS.md"
-fi
-
 printf 'Repo synced from %s\n' "$HOME"

@@ -26,6 +26,7 @@ Private dotfiles for keeping terminal setup consistent across machines.
 - Machine-local overrides live outside the repo:
   - `~/.zshrc.local`
   - `~/.ssh/config.local`
+- `AGENTS.md` is the one file meant to stay as a symlink back to the repo copy.
 - Installed shared helper files live under `~/.config/dotfiles/`.
 
 ## macOS
@@ -49,6 +50,7 @@ Notes:
 - `Ghostty` is installed via Homebrew cask here.
 - `croot` jumps to `~/Code`.
 - `code` stays available for the VS Code CLI.
+- `~/AGENTS.md` is symlinked to the repo copy so agent memory stays shared and edits do not drift.
 
 ## Linux
 
@@ -76,6 +78,16 @@ For native Windows, the practical pieces are:
 
 This repo's `zsh`, `Ghostty`, and `cmux` setup is not meant for native Windows.
 
+If you want the same global agent memory on a Windows desktop, clone the repo there and point `%USERPROFILE%\\AGENTS.md` at the repo copy.
+
+PowerShell:
+
+```powershell
+New-Item -ItemType SymbolicLink -Path "$HOME\\AGENTS.md" -Target "$HOME\\Code\\dotfiles\\AGENTS.md"
+```
+
+If symlinks are restricted on that machine, copy the file instead and re-copy it whenever you update the repo.
+
 ## Local Overrides
 
 Use these files for machine-specific tweaks:
@@ -99,9 +111,12 @@ Refresh the repo from the current machine:
 bash scripts/sync-from-home.sh
 ```
 
+Note:
+
+- `AGENTS.md` is not copied by the sync script because the repo file is the source of truth and the live home path is just a symlink.
+
 ## Notes
 
 - This repo tracks SSH config, but not private keys.
 - `lg` aliases to `lazygit`.
 - `croot` is the replacement for the old `code` alias.
-
