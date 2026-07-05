@@ -1,0 +1,23 @@
+font-family = "JetBrainsMono NFM Regular"
+font-size = 14.5
+
+window-padding-x = 10
+window-padding-y = 10
+window-padding-balance = true
+
+window-decoration = true
+window-save-state = always
+
+cursor-style = block
+adjust-cell-height = 35%
+
+mouse-scroll-multiplier = 2
+copy-on-select = clipboard
+
+window-colorspace = "display-p3"
+macos-titlebar-style = transparent
+
+background = #050505
+background-opacity = 0.85
+background-blur = 40
+

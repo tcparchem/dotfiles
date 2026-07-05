@@ -1,0 +1,7 @@
+# Machine-local zsh overrides.
+
+# Example:
+# export CODE_ROOT="$HOME/Work"
+# export LOCAL_WORKSPACE_TITLE="MacBook Pro"
+# export MINI_MONITOR_BIN="/usr/local/bin/btop"
+

@@ -1,0 +1,6 @@
+# Machine-local SSH overrides and additional hosts.
+
+# Example:
+# Host macmini
+#   HostName custom-host.tailnet.ts.net
+

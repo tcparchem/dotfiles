@@ -1,0 +1,20 @@
+Host macmini
+  HostName your-mac.your-tailnet.ts.net
+  User your-username
+  IdentityFile ~/.ssh/id_ed25519_macmini
+  IdentitiesOnly yes
+  ServerAliveInterval 20
+  ServerAliveCountMax 2
+  TCPKeepAlive yes
+
+Host macmini-lan
+  HostName 192.168.1.50
+  User your-username
+  IdentityFile ~/.ssh/id_ed25519_macmini
+  IdentitiesOnly yes
+  ServerAliveInterval 20
+  ServerAliveCountMax 2
+  TCPKeepAlive yes
+
+Include ~/.ssh/config.local
+
