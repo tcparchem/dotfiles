@@ -6,6 +6,11 @@ Private dotfiles for keeping terminal setup consistent across machines.
 
 - [Brewfile](./Brewfile)
 - [AGENTS.md](./AGENTS.md)
+- [bin/mini](./bin/mini)
+- [bin/mmini](./bin/mmini)
+- [bin/mmon](./bin/mmon)
+- [bin/mmlan](./bin/mmlan)
+- [bin/doctor](./bin/doctor)
 - [shell/zsh/.zshrc](./shell/zsh/.zshrc)
 - [shell/zsh/prompt.zsh](./shell/zsh/prompt.zsh)
 - [shell/zsh/aliases.zsh](./shell/zsh/aliases.zsh)
@@ -28,6 +33,8 @@ Private dotfiles for keeping terminal setup consistent across machines.
   - `~/.ssh/config.local`
 - `AGENTS.md` is the one file meant to stay as a symlink back to the repo copy.
 - Installed shared helper files live under `~/.config/dotfiles/`.
+- Terminal commands like `mini`, `mmini`, and `mmon` are installed as real executables under `~/.config/dotfiles/bin`.
+- `doctor` is a small health check command for the terminal and Mac mini workflow.
 
 ## macOS
 
@@ -51,6 +58,8 @@ Notes:
 - `croot` jumps to `~/Code`.
 - `code` stays available for the VS Code CLI.
 - `~/AGENTS.md` is symlinked to the repo copy so agent memory stays shared and edits do not drift.
+- `mini`, `mmini`, `mmon`, and `mmlan` work as commands, not just shell aliases.
+- `doctor` checks `PATH`, `cmux`, SSH access to `macmini`, remote `btop`, and the `AGENTS.md` symlink.
 
 ## Linux
 
@@ -114,6 +123,26 @@ bash scripts/sync-from-home.sh
 Note:
 
 - `AGENTS.md` is not copied by the sync script because the repo file is the source of truth and the live home path is just a symlink.
+
+## Doctor
+
+Run:
+
+```sh
+doctor
+```
+
+It checks:
+
+- `cmux`
+- `ssh`
+- local `btop`
+- `mini`, `mmini`, and `mmon` command availability
+- whether the dotfiles bin directory is on `PATH`
+- whether `~/AGENTS.md` is a valid symlink
+- whether `macmini` resolves in SSH config
+- whether passwordless SSH to `macmini` works
+- whether remote `btop` is available on `macmini`
 
 ## Notes
 

@@ -55,8 +55,3 @@ mini() {
     cmux workspace-action --workspace "$workspace" --action set-color --color "$color" >/dev/null 2>&1 || true
   fi
 }
-
-alias mmini="mini shell"
-alias mmon="mini monitor"
-alias mmlan="mini lan"
-

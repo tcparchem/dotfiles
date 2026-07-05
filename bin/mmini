@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+exec "${HOME}/.config/dotfiles/bin/mini" shell "$@"
+

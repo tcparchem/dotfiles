@@ -46,6 +46,11 @@ backup_and_copy "$repo_root/shell/zsh/prompt.zsh" "$HOME/.config/dotfiles/zsh/pr
 backup_and_copy "$repo_root/shell/zsh/aliases.zsh" "$HOME/.config/dotfiles/zsh/aliases.zsh"
 backup_and_copy "$repo_root/shell/zsh/cmux.zsh" "$HOME/.config/dotfiles/zsh/cmux.zsh"
 backup_and_copy "$repo_root/shell/zsh/machines.zsh" "$HOME/.config/dotfiles/zsh/machines.zsh"
+backup_and_copy "$repo_root/bin/mini" "$HOME/.config/dotfiles/bin/mini"
+backup_and_copy "$repo_root/bin/mmini" "$HOME/.config/dotfiles/bin/mmini"
+backup_and_copy "$repo_root/bin/mmon" "$HOME/.config/dotfiles/bin/mmon"
+backup_and_copy "$repo_root/bin/mmlan" "$HOME/.config/dotfiles/bin/mmlan"
+backup_and_copy "$repo_root/bin/doctor" "$HOME/.config/dotfiles/bin/doctor"
 backup_and_copy "$repo_root/themes/oh-my-posh.json" "$HOME/.config/dotfiles/themes/oh-my-posh.json"
 backup_and_copy "$repo_root/ssh/config" "$HOME/.ssh/config"
 backup_and_copy "$repo_root/ghostty/config" "$HOME/.config/ghostty/config"
@@ -61,6 +66,11 @@ fi
 chmod 700 "$HOME/.ssh"
 chmod 600 "$HOME/.ssh/config"
 chmod 600 "$HOME/.ssh/config.local"
+chmod 755 "$HOME/.config/dotfiles/bin/mini"
+chmod 755 "$HOME/.config/dotfiles/bin/mmini"
+chmod 755 "$HOME/.config/dotfiles/bin/mmon"
+chmod 755 "$HOME/.config/dotfiles/bin/mmlan"
+chmod 755 "$HOME/.config/dotfiles/bin/doctor"
 
 zsh -n "$HOME/.zshrc"
 printf '\nDotfiles installed.\n'

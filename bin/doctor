@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+set -u
+
+failures=0
+
+check_ok() {
+  printf '[ok] %s\n' "$1"
+}
+
+check_warn() {
+  printf '[warn] %s\n' "$1"
+}
+
+check_fail() {
+  printf '[fail] %s\n' "$1"
+  failures=$((failures + 1))
+}
+
+if command -v cmux >/dev/null 2>&1; then
+  check_ok "cmux is installed"
+else
+  check_fail "cmux is missing from PATH"
+fi
+
+if command -v ssh >/dev/null 2>&1; then
+  check_ok "ssh is installed"
+else
+  check_fail "ssh is missing from PATH"
+fi
+
+if command -v btop >/dev/null 2>&1; then
+  check_ok "local btop is installed"
+else
+  check_warn "local btop is not in PATH"
+fi
+
+if command -v mini >/dev/null 2>&1 && command -v mmini >/dev/null 2>&1 && command -v mmon >/dev/null 2>&1; then
+  check_ok "mini, mmini, and mmon are available as commands"
+else
+  check_fail "mini command set is not fully available in PATH"
+fi
+
+if [[ -n "${DOTFILES_BIN_DIR:-}" ]]; then
+  case ":$PATH:" in
+    *":$DOTFILES_BIN_DIR:"*) check_ok "dotfiles bin directory is on PATH" ;;
+    *) check_fail "DOTFILES_BIN_DIR is set but not on PATH" ;;
+  esac
+else
+  check_warn "DOTFILES_BIN_DIR is not set in this shell"
+fi
+
+if [[ -L "$HOME/AGENTS.md" ]]; then
+  target="$(readlink "$HOME/AGENTS.md")"
+  if [[ -e "$target" ]]; then
+    check_ok "AGENTS.md symlink is valid -> $target"
+  else
+    check_fail "AGENTS.md symlink target is missing -> $target"
+  fi
+elif [[ -e "$HOME/AGENTS.md" ]]; then
+  check_warn "AGENTS.md exists but is not a symlink"
+else
+  check_fail "AGENTS.md is missing from $HOME"
+fi
+
+host="$(ssh -G macmini 2>/dev/null | awk '$1 == "hostname" { print $2; exit }')"
+if [[ -n "$host" ]]; then
+  check_ok "macmini SSH alias resolves to $host"
+else
+  check_fail "macmini SSH alias is missing or invalid"
+fi
+
+if ssh -o BatchMode=yes -o ConnectTimeout=5 macmini 'printf ok' >/dev/null 2>&1; then
+  check_ok "passwordless SSH to macmini works"
+else
+  check_fail "passwordless SSH to macmini failed"
+fi
+
+if ssh -o BatchMode=yes -o ConnectTimeout=5 macmini '/opt/homebrew/bin/btop --version >/dev/null 2>&1 || command -v btop >/dev/null 2>&1' >/dev/null 2>&1; then
+  check_ok "remote btop is available on macmini"
+else
+  check_fail "remote btop is missing or not runnable on macmini"
+fi
+
+if (( failures > 0 )); then
+  printf '\nDoctor found %d issue(s).\n' "$failures"
+  exit 1
+fi
+
+printf '\nDoctor checks passed.\n'
+
