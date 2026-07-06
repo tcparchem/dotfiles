@@ -110,14 +110,25 @@ function Get-WindowsTerminalSettingsPath {
 $agentSource = Join-Path $repoRoot 'AGENTS.md'
 $profileSource = Join-Path $repoRoot 'windows\powershell\Microsoft.PowerShell_profile.ps1'
 $terminalSource = Join-Path $repoRoot 'windows\terminal\settings.json'
+$sshConfigSource = Join-Path $repoRoot 'ssh\config'
+$sshConfigLocalExampleSource = Join-Path $repoRoot 'examples\ssh-config.local.example'
 
 $agentDestination = Join-Path $HOME 'AGENTS.md'
 $profileDestination = Get-PowerShellProfilePath
 $terminalDestination = Get-WindowsTerminalSettingsPath
+$sshConfigDestination = Join-Path $HOME '.ssh\config'
+$sshConfigLocalExampleDestination = Join-Path $HOME '.ssh\config.local.example'
+$sshConfigLocalDestination = Join-Path $HOME '.ssh\config.local'
 
 New-LinkOrCopy -Source $agentSource -Destination $agentDestination
 New-HardLinkOrCopy -Source $profileSource -Destination $profileDestination
 Copy-WithBackup -Source $terminalSource -Destination $terminalDestination
+Copy-WithBackup -Source $sshConfigSource -Destination $sshConfigDestination
+Copy-WithBackup -Source $sshConfigLocalExampleSource -Destination $sshConfigLocalExampleDestination
+
+if (-not (Test-Path -LiteralPath $sshConfigLocalDestination)) {
+    New-Item -ItemType File -Force -Path $sshConfigLocalDestination | Out-Null
+}
 
 Write-Host ''
 Write-Host 'Windows dotfiles installed.'

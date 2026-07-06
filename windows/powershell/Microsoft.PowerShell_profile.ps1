@@ -1,4 +1,4 @@
-﻿# Oh My Posh
+# Oh My Posh
 if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
     oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression
 }
@@ -14,6 +14,74 @@ if (Get-Command lazygit -ErrorAction SilentlyContinue) {
 
 function croot {
     Set-Location 'C:\Code'
+}
+
+$script:MacMiniSshConfigPath = Join-Path $HOME '.ssh\config'
+
+function Test-MacMiniSshHost {
+    param(
+        [Parameter(Mandatory = $true)][string]$HostAlias
+    )
+
+    if (-not (Get-Command ssh -ErrorAction SilentlyContinue)) {
+        throw 'ssh is missing from PATH. Install the OpenSSH Client feature and restart PowerShell.'
+    }
+
+    if (-not (Test-Path -LiteralPath $script:MacMiniSshConfigPath)) {
+        throw "Missing $script:MacMiniSshConfigPath. Run scripts/bootstrap-windows.ps1 to install the tracked SSH config."
+    }
+
+    $pattern = "^\s*Host\s+$([regex]::Escape($HostAlias))\s*$"
+    if (-not (Select-String -LiteralPath $script:MacMiniSshConfigPath -Pattern $pattern -Quiet)) {
+        throw "The '$HostAlias' host alias is missing from $script:MacMiniSshConfigPath. Run scripts/bootstrap-windows.ps1 again or add the Host entry manually."
+    }
+}
+
+function Invoke-MacMiniSsh {
+    param(
+        [Parameter(Mandatory = $true)][string]$HostAlias,
+        [string[]]$RemoteCommand = @()
+    )
+
+    Test-MacMiniSshHost -HostAlias $HostAlias
+
+    if ($RemoteCommand.Count -gt 0) {
+        & ssh $HostAlias @RemoteCommand
+        return
+    }
+
+    & ssh $HostAlias
+}
+
+function mmini {
+    param(
+        [Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments
+    )
+
+    Invoke-MacMiniSsh -HostAlias 'macmini' -RemoteCommand $Arguments
+}
+
+function mmon {
+    param(
+        [Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments
+    )
+
+    Test-MacMiniSshHost -HostAlias 'macmini'
+
+    if ($Arguments.Count -gt 0) {
+        & ssh -tt macmini @Arguments
+        return
+    }
+
+    & ssh -tt macmini '/opt/homebrew/bin/btop'
+}
+
+function mmlan {
+    param(
+        [Parameter(ValueFromRemainingArguments = $true)][string[]]$Arguments
+    )
+
+    Invoke-MacMiniSsh -HostAlias 'macmini-lan' -RemoteCommand $Arguments
 }
 
 # PSReadLine configuration

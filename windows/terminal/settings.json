@@ -1,4 +1,4 @@
-﻿{
+{
     "$help": "https://aka.ms/terminal-documentation",
     "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions":
@@ -78,7 +78,8 @@
                 "face": "CaskaydiaCove NF",
                 "size": 14
             },
-            "padding": "8, 8, 8, 8"
+            "padding": "8, 8, 8, 8",
+            "startingDirectory": "C:\\Code"
         },
         "list":
         [
@@ -86,7 +87,8 @@
                 "commandline": "%SystemRoot%\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
                 "guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
                 "hidden": false,
-                "name": "Windows PowerShell"
+                "name": "Windows PowerShell",
+                "startingDirectory": "C:\\Code"
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
@@ -106,7 +108,8 @@
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",
-                "source": "Windows.Terminal.PowershellCore"
+                "source": "Windows.Terminal.PowershellCore",
+                "startingDirectory": "C:\\Code"
             },
             {
                 "guid": "{e107e196-63da-560d-9b62-f64d6ddef9db}",
@@ -142,7 +145,8 @@
                 "guid": "{5fb123f1-af88-5b5c-8953-d14a8def1978}",
                 "hidden": false,
                 "name": "PowerShell 7",
-                "source": "Windows.Terminal.PowershellCore"
+                "source": "Windows.Terminal.PowershellCore",
+                "startingDirectory": "C:\\Code"
             }
         ]
     },
