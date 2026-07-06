@@ -20,39 +20,26 @@ source ~/.zshrc
 
 ### Windows
 
-On any Windows box:
-
-1. Install PowerShell 7, Windows Terminal, Git, and a Nerd Font such as CaskaydiaCove.
-2. Clone this repo to `C:\Code\dotfiles`.
-3. Run:
+For any Windows machine:
 
 ```powershell
-powershell -ExecutionPolicy RemoteSigned -File .\scripts\install-windows.ps1
+powershell -ExecutionPolicy RemoteSigned -File .\scripts\bootstrap-windows.ps1
 ```
 
-4. Restart Windows Terminal.
-
-That script backs up your existing profile and terminal settings, installs `AGENTS.md`, and links the PowerShell profile back to `windows/powershell/Microsoft.PowerShell_profile.ps1` when possible, so the repo stays the source of truth.
+That one command installs the Windows tools and modules, installs the Nerd Font, then applies the tracked PowerShell profile, Windows Terminal settings, and `AGENTS.md`.
+If `winget` is missing, install App Installer once and rerun the same command.
 
 ## Notes
 
 - `windows/powershell/Microsoft.PowerShell_profile.ps1` is the tracked PowerShell 7 profile.
-- `windows/terminal/settings.json` is the tracked Windows Terminal export for this machine.
-- The PowerShell profile includes `lg` for `lazygit` and `croot` for `C:\Code`.
+- `windows/terminal/settings.json` is the tracked Windows Terminal export.
+- The profile includes `lg` for `lazygit` and `croot` for `C:\Code`.
 - `zsh`, `Ghostty`, and `cmux` are not meant for native Windows.
-- `AGENTS.md` is shared from the repo copy so agent memory stays in one place.
+- `AGENTS.md` is shared from the repo copy.
 
 ## Local Overrides
-
-Use these files for machine-specific tweaks:
 
 - `~/.zshrc.local`
 - `~/.ssh/config.local`
 
-Examples are included in [examples](./examples).
-
-## Syncing
-
-```sh
-bash scripts/sync-from-home.sh
-```
+Examples live in [examples](./examples).
