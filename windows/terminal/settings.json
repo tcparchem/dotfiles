@@ -75,7 +75,7 @@
             "useAcrylic": true,
             "opacity": 50,
             "font": {
-                "face": "CaskaydiaCove NF",
+                "face": "Cascadia Mono",
                 "size": 14
             },
             "padding": "8, 8, 8, 8",
