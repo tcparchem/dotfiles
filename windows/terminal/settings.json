@@ -73,7 +73,7 @@
     {
         "defaults": {
             "useAcrylic": true,
-            "opacity": 50,
+            "opacity": 45,
             "font": {
                 "face": "Cascadia Mono",
                 "size": 14
@@ -92,7 +92,6 @@
             },
             {
                 "commandline": "%SystemRoot%\\System32\\cmd.exe",
-                "elevate": true,
                 "guid": "{0caa0dad-35be-5f56-a8ff-afceeeaa6101}",
                 "hidden": false,
                 "name": "Command Prompt"
@@ -104,7 +103,6 @@
                 "source": "Windows.Terminal.Azure"
             },
             {
-                "elevate": true,
                 "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
                 "hidden": false,
                 "name": "PowerShell",

@@ -62,36 +62,7 @@ function Install-ModuleIfMissing {
     }
 }
 
-function Repair-And-Install-NerdFonts {
-    param(
-        [Parameter(Mandatory = $true)][string]$FontName
-    )
 
-    $moduleName = 'NerdFonts'
-    $moduleRoots = @(
-        Join-Path $HOME 'Documents\WindowsPowerShell\Modules'
-        Join-Path $HOME 'Documents\PowerShell\Modules'
-        Join-Path $HOME 'OneDrive\Documents\WindowsPowerShell\Modules'
-        Join-Path $HOME 'OneDrive\Documents\PowerShell\Modules'
-    ) | Select-Object -Unique
-
-    foreach ($root in $moduleRoots) {
-        $modulePath = Join-Path $root $moduleName
-        if (Test-Path -LiteralPath $modulePath) {
-            Remove-Item -LiteralPath $modulePath -Recurse -Force
-        }
-    }
-
-    try {
-        Install-Module -Name $moduleName -Scope CurrentUser -Force -AllowClobber -ErrorAction Stop
-        Import-Module $moduleName -ErrorAction Stop
-        Install-NerdFont -Name $FontName | Out-Null
-        Write-Host "$FontName font installed"
-    } catch {
-        Write-Warning "Skipping NerdFonts install: $($_.Exception.Message)"
-        Write-Warning 'The Windows profile, terminal settings, and SSH config will still be installed.'
-    }
-}
 
 Assert-Command -Name winget -Message 'winget is required. Install App Installer, then rerun this script.'
 
@@ -105,6 +76,6 @@ Install-WingetPackage -Id 'ajeetdsouza.zoxide'
 Ensure-PackageManagement
 Install-ModuleIfMissing -Name 'Terminal-Icons'
 Install-ModuleIfMissing -Name 'PSFzf'
-Repair-And-Install-NerdFonts -FontName 'CaskaydiaCove'
+Write-Host 'Using built-in Cascadia Mono; no Nerd Fonts install is required.'
 
 & (Join-Path $PSScriptRoot 'install-windows.ps1')

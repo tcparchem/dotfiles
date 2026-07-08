@@ -1,6 +1,12 @@
 # Oh My Posh
+$script:DotfilesThemePath = Join-Path (Split-Path -Parent $PROFILE) 'dotfiles-windows.omp.json'
 if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
-    oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH\powerlevel10k_lean.omp.json" | Invoke-Expression
+    $themePath = if (Test-Path -LiteralPath $script:DotfilesThemePath) {
+        $script:DotfilesThemePath
+    } else {
+        Join-Path $env:POSH_THEMES_PATH 'powerlevel10k_lean.omp.json'
+    }
+    oh-my-posh init pwsh --config $themePath | Invoke-Expression
 }
 
 $script:TerminalToolsBin = Join-Path $HOME 'OneDrive\Documents\TerminalTools\bin'
@@ -318,3 +324,22 @@ function PSConsoleHostReadLine {
 }
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # DO NOT MODIFY -- coreutils -- 60b36fc6-2d59-49df-be51-28dd2f4c3c9a
+
+function global:prompt {
+    $path = (Get-Location).Path
+    $branch = ''
+
+    if (Get-Command git -ErrorAction SilentlyContinue) {
+        try {
+            $branch = (& git branch --show-current 2>$null).Trim()
+        } catch {
+            $branch = ''
+        }
+    }
+
+    if ($branch) {
+        return "$path [$branch] > "
+    }
+
+    return "$path > "
+}

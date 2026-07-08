@@ -26,9 +26,9 @@ For any Windows machine:
 powershell -ExecutionPolicy RemoteSigned -File .\scripts\bootstrap-windows.ps1
 ```
 
-That one command installs the Windows tools and modules, tries to install the Nerd Font, applies the tracked PowerShell profile, Windows Terminal settings, the shared SSH config, and `AGENTS.md`.
+That one command installs the Windows tools and modules, applies the tracked PowerShell profile, Windows Terminal settings, the shared SSH config, and `AGENTS.md`.
 If `winget` is missing, install App Installer once and rerun the same command.
-If the NerdFonts module is broken on your machine, the bootstrap will warn and keep going so the SSH and terminal setup still completes.
+The Windows prompt now uses built-in Cascadia Mono, so no Nerd Fonts module install is required.
 
 ## Windows SSH
 
