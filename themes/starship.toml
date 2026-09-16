@@ -1,0 +1,96 @@
+"$schema" = "https://starship.rs/config-schema.json"
+
+# Based on https://corti.com/why-i-switched-from-oh-my-posh-to-starship-and-what-my-config-looks-like/
+add_newline = false
+
+# PowerShell does not support right_format. The fill module preserves the
+# article's left/right layout and puts the input prompt on the next line.
+format = """$directory$fill$all$line_break$character"""
+palette = "vibrant_black"
+command_timeout = 1000
+
+[fill]
+symbol = " "
+
+[character]
+vicmd_symbol = '[\[N\] >>>](bold yellow)'
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+
+[status]
+disabled = false
+format = '[✘ $status]($style) '
+
+[cmd_duration]
+min_time = 2000
+format = '[$duration](yellow) '
+
+[sudo]
+disabled = false
+
+[jobs]
+symbol = '✦ '
+
+[shlvl]
+disabled = false
+threshold = 2
+
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+
+[directory.substitutions]
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[git_status]
+format = '([$all_status$ahead_behind]($style) )'
+
+[azure]
+format = '[$symbol($subscription )]($style)'
+disabled = false
+style = 'bold blue'
+symbol = "󰠅 "
+
+[golang]
+format = '[ ](bold cyan)'
+
+[python]
+format = '[ ($version )(\($virtualenv\) )](bold yellow)'
+
+[dotnet]
+format = '[ ](bold blue)'
+
+[nodejs]
+format = '[ ](bold green)'
+
+[kubernetes]
+symbol = '☸ '
+disabled = true
+detect_files = ['Dockerfile']
+format = '[$symbol$context( \($namespace\))]($style) '
+
+[docker_context]
+disabled = false
+
+[palettes.vibrant_black]
+black = "#151A21"
+red = "#FF4D6D"
+green = "#39FF88"
+yellow = "#FFE66D"
+blue = "#4DB8FF"
+purple = "#D46BFF"
+cyan = "#36F1CD"
+white = "#F2F5F7"
+bright-black = "#6B7280"
+bright-red = "#FF1744"
+bright-green = "#76FF03"
+bright-yellow = "#FFF200"
+bright-blue = "#00B0FF"
+bright-purple = "#C000FF"
+bright-cyan = "#00F5FF"
+bright-white = "#FFFFFF"
+text = "#F2F5F7"
+muted = "#94A3B8"
+base = "#000000"
