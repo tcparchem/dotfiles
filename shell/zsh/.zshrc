@@ -1,7 +1,6 @@
 export TERM=xterm-256color
 export DOTFILES_CONFIG_DIR="$HOME/.config/dotfiles"
 export DOTFILES_ZSH_DIR="$DOTFILES_CONFIG_DIR/zsh"
-export DOTFILES_THEME_PATH="$DOTFILES_CONFIG_DIR/themes/oh-my-posh.json"
 export DOTFILES_BIN_DIR="$DOTFILES_CONFIG_DIR/bin"
 
 case ":$PATH:" in

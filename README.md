@@ -28,7 +28,7 @@ powershell -ExecutionPolicy RemoteSigned -File .\scripts\bootstrap-windows.ps1
 
 That one command installs the Windows tools and modules, applies the tracked PowerShell profile, Windows Terminal settings, the shared SSH config, and `AGENTS.md`.
 If `winget` is missing, install App Installer once and rerun the same command.
-The Windows prompt now uses built-in Cascadia Mono, so no Nerd Fonts module install is required.
+The Starship prompt uses Nerd Font glyphs. The macOS Brewfile installs the JetBrains Mono family expected by Ghostty; Windows Terminal expects the `CaskaydiaMono NFM` family.
 
 ## Windows SSH
 
@@ -68,6 +68,7 @@ If `Set-Service` says access is denied, run that one command in an elevated Powe
 ## Notes
 
 - `windows/powershell/Microsoft.PowerShell_profile.ps1` is the tracked PowerShell 7 profile.
+- `themes/starship.toml` is the shared Starship prompt configuration.
 - `windows/terminal/settings.json` is the tracked Windows Terminal export.
 - The profile includes `lg` for `lazygit`, `croot` for `C:\Code`, and the `mmini`/`mmon`/`mmlan` SSH helpers.
 - `zsh`, `Ghostty`, and `cmux` are not meant for native Windows.

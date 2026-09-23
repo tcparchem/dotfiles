@@ -69,13 +69,15 @@
             "type": "remainingProfiles"
         }
     ],
+    "theme": "Vibrant Black",
     "profiles":
     {
         "defaults": {
+            "colorScheme": "Vibrant Black",
             "useAcrylic": true,
-            "opacity": 45,
+            "opacity": 75,
             "font": {
-                "face": "Cascadia Mono",
+                "face": "CaskaydiaMono NFM",
                 "size": 14
             },
             "padding": "8, 8, 8, 8",
@@ -148,6 +150,45 @@
             }
         ]
     },
-    "schemes": [],
-    "themes": []
+    "schemes": [
+        {
+            "name": "Vibrant Black",
+            "cursorColor": "#FBBF24",
+            "selectionBackground": "#334155",
+            "background": "#000000",
+            "foreground": "#F8FAFC",
+            "black": "#0B0F14",
+            "red": "#C0263D",
+            "green": "#0F9D58",
+            "yellow": "#B8860B",
+            "blue": "#2457A6",
+            "purple": "#6D28D9",
+            "cyan": "#0E7490",
+            "white": "#CBD5E1",
+            "brightBlack": "#4B5563",
+            "brightRed": "#E11D48",
+            "brightGreen": "#16A34A",
+            "brightYellow": "#D4A72C",
+            "brightBlue": "#3B82F6",
+            "brightPurple": "#8B5CF6",
+            "brightCyan": "#06B6D4",
+            "brightWhite": "#FFFFFF"
+        }
+    ],    "themes": [
+        {
+            "name": "Vibrant Black",
+            "tab": {
+                "background": "#000000FF",
+                "showCloseButton": "always",
+                "unfocusedBackground": null
+            },
+            "tabRow": {
+                "background": "#000000FF",
+                "unfocusedBackground": "#101010FF"
+            },
+            "window": {
+                "applicationTheme": "dark"
+            }
+        }
+    ]
 }

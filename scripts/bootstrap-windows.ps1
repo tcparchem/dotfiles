@@ -69,7 +69,7 @@ Assert-Command -Name winget -Message 'winget is required. Install App Installer,
 Install-WingetPackage -Id 'Git.Git'
 Install-WingetPackage -Id 'Microsoft.PowerShell'
 Install-WingetPackage -Id 'Microsoft.WindowsTerminal'
-Install-WingetPackage -Id 'JanDeDobbeleer.OhMyPosh'
+Install-WingetPackage -Id 'Starship.Starship'
 Install-WingetPackage -Id 'JesseDuffield.lazygit'
 Install-WingetPackage -Id 'ajeetdsouza.zoxide'
 

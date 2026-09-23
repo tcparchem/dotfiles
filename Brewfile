@@ -1,11 +1,11 @@
-tap "jandedobbeleer/oh-my-posh"
 tap "manaflow-ai/cmux"
 
 brew "btop"
-brew "jandedobbeleer/oh-my-posh/oh-my-posh"
 brew "lazygit"
+brew "starship"
 brew "zsh-autosuggestions"
 brew "cmux"
 
+cask "font-jetbrains-mono-nerd-font"
 cask "ghostty"
 

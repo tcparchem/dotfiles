@@ -1,14 +1,3 @@
-# Oh My Posh
-$script:DotfilesThemePath = Join-Path (Split-Path -Parent $PROFILE) 'dotfiles-windows.omp.json'
-if (Get-Command oh-my-posh -ErrorAction SilentlyContinue) {
-    $themePath = if (Test-Path -LiteralPath $script:DotfilesThemePath) {
-        $script:DotfilesThemePath
-    } else {
-        Join-Path $env:POSH_THEMES_PATH 'powerlevel10k_lean.omp.json'
-    }
-    oh-my-posh init pwsh --config $themePath | Invoke-Expression
-}
-
 $script:TerminalToolsBin = Join-Path $HOME 'OneDrive\Documents\TerminalTools\bin'
 if (Test-Path $script:TerminalToolsBin) {
     $env:Path = "$script:TerminalToolsBin;$env:Path"
@@ -91,8 +80,10 @@ function mmlan {
 }
 
 # PSReadLine configuration
-Set-PSReadLineOption -PredictionSource HistoryAndPlugin
-Set-PSReadLineOption -PredictionViewStyle ListView
+if (-not [Console]::IsOutputRedirected) {
+    Set-PSReadLineOption -PredictionSource HistoryAndPlugin
+    Set-PSReadLineOption -PredictionViewStyle ListView
+}
 Set-PSReadLineOption -EditMode Windows
 Set-PSReadLineOption -BellStyle None
 Set-PSReadLineOption -HistoryNoDuplicates
@@ -111,12 +102,22 @@ Set-PSReadLineOption -Colors @{
     String    = 'Yellow'
 }
 
-if (Get-Module -ListAvailable Terminal-Icons) {
-    Import-Module Terminal-Icons
+# Register Terminal-Icons' format view now, then let module autoloading import
+# the expensive implementation only when file-system output first needs it.
+$terminalIconsRoot = Join-Path (Split-Path -Parent $PROFILE) 'Modules\Terminal-Icons'
+$terminalIconsFormat = Get-ChildItem -Path "$terminalIconsRoot\*\Terminal-Icons.format.ps1xml" `
+    -File -ErrorAction SilentlyContinue |
+    Sort-Object { [version]$_.Directory.Name } -Descending |
+    Select-Object -First 1 -ExpandProperty FullName
+if ($terminalIconsFormat) {
+    Update-FormatData -PrependPath $terminalIconsFormat
 }
 
-if (Get-Module -ListAvailable PSFzf) {
-    Import-Module PSFzf
+# PSFzf commands still autoload normally. Preserve its default Ctrl+t behavior
+# while deferring the large module import until the shortcut is actually used.
+Set-PSReadLineKeyHandler -Chord Ctrl+t -BriefDescription FzfProvider -ScriptBlock {
+    Import-Module PSFzf -ErrorAction Stop
+    Invoke-FzfPsReadlineHandlerProvider
 }
 
 if (Get-Command zoxide -ErrorAction SilentlyContinue) {
@@ -325,21 +326,6 @@ function PSConsoleHostReadLine {
 # ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 # DO NOT MODIFY -- coreutils -- 60b36fc6-2d59-49df-be51-28dd2f4c3c9a
 
-function global:prompt {
-    $path = (Get-Location).Path
-    $branch = ''
-
-    if (Get-Command git -ErrorAction SilentlyContinue) {
-        try {
-            $branch = (& git branch --show-current 2>$null).Trim()
-        } catch {
-            $branch = ''
-        }
-    }
-
-    if ($branch) {
-        return "$path [$branch] > "
-    }
-
-    return "$path > "
+if (Get-Command starship -ErrorAction SilentlyContinue) {
+    Invoke-Expression (&starship init powershell)
 }
