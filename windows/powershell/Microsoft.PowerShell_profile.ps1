@@ -95,7 +95,7 @@ Set-PSReadLineKeyHandler -Chord Ctrl+r -Function ReverseSearchHistory
 
 # Better colors
 Set-PSReadLineOption -Colors @{
-    Command   = 'Cyan'
+    Command   = 'White'
     Parameter = 'Gray'
     Operator  = 'DarkGray'
     Variable  = 'Green'

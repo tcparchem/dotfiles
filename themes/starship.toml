@@ -5,17 +5,22 @@ add_newline = false
 
 # PowerShell does not support right_format. The fill module preserves the
 # article's left/right layout and puts the input prompt on the next line.
-format = """$directory$fill$all$line_break$character"""
+format = "$username[ on ](muted)$directory$git_branch$git_status$line_break$character"
 palette = "vibrant_black"
 command_timeout = 1000
 
 [fill]
 symbol = " "
 
+[username]
+show_always = true
+format = '[ $user]($style)'
+style_user = 'bold cyan'
+style_root = 'bold red'
 [character]
-vicmd_symbol = '[\[N\] >>>](bold yellow)'
-success_symbol = '[➜](bold green)'
-error_symbol = '[➜](bold red)'
+vicmd_symbol = '[#](bold red) '
+success_symbol = '[#](bold red) '
+error_symbol = '[#](bold red) '
 
 [status]
 disabled = false
@@ -38,6 +43,9 @@ threshold = 2
 [directory]
 truncation_length = 4
 truncate_to_repo = true
+format = '[ ](bold blue)[$path]($style)'
+style = 'bold cyan'
+home_symbol = '~'
 
 [directory.substitutions]
 
