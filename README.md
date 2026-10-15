@@ -12,7 +12,7 @@ Terminal setup kept consistent across machines: zsh, Ghostty, and cmux on macOS,
 | `windows/powershell/` | Tracked PowerShell 7 profile |
 | `windows/terminal/` | Windows Terminal settings export |
 | `bin/doctor` | macOS health check for the tools and PATH |
-| `scripts/` | Installers and sync scripts, one per platform |
+| `scripts/` | Installers and sync scripts, one per platform ([details](scripts/README.md)) |
 | `examples/` | Templates for untracked local overrides |
 | `Brewfile` | macOS packages, casks, and the Nerd Font |
 
