@@ -1,6 +1,7 @@
 # Dotfiles
 
-Private dotfiles for keeping terminal setup consistent across machines.
+Dotfiles for keeping terminal setup consistent across machines.
+Machine-specific details (SSH hosts, addresses, usernames) are kept out of the repo in `~/.ssh/config.local` and `~/.zshrc.local`.
 
 ## What's here
 
@@ -33,6 +34,8 @@ The Starship prompt uses Nerd Font glyphs. The macOS Brewfile installs the JetBr
 ## Windows SSH
 
 After the Windows bootstrap finishes:
+
+Define the `macmini` and `macmini-lan` hosts in `~/.ssh/config.local` first, using `~/.ssh/config.local.example` as a guide.
 
 1. Create a key if you do not already have one.
 

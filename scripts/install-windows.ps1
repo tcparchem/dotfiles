@@ -131,6 +131,7 @@ Copy-WithBackup -Source $sshConfigLocalExampleSource -Destination $sshConfigLoca
 
 if (-not (Test-Path -LiteralPath $sshConfigLocalDestination)) {
     New-Item -ItemType File -Force -Path $sshConfigLocalDestination | Out-Null
+    Write-Host "Created empty $sshConfigLocalDestination. Add your hosts using $sshConfigLocalExampleDestination as a guide."
 }
 
 Write-Host ''

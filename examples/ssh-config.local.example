@@ -1,6 +1,14 @@
-# Machine-local SSH overrides and additional hosts.
+# Machine-local SSH hosts. Copy to ~/.ssh/config.local and fill in your values.
+# The mmini, mmon, mmlan, and mini helpers expect the aliases below.
 
-# Example:
-# Host macmini
-#   HostName custom-host.tailnet.ts.net
+Host macmini
+  HostName your-mac.your-tailnet.ts.net
+  User your-username
+  IdentityFile ~/.ssh/id_ed25519_macmini
+  IdentitiesOnly yes
 
+Host macmini-lan
+  HostName 192.168.1.50
+  User your-username
+  IdentityFile ~/.ssh/id_ed25519_macmini
+  IdentitiesOnly yes

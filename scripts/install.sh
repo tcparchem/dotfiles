@@ -61,6 +61,7 @@ backup_and_copy "$repo_root/examples/ssh-config.local.example" "$HOME/.ssh/confi
 
 if [[ ! -e "$HOME/.ssh/config.local" ]]; then
   : > "$HOME/.ssh/config.local"
+  printf '%s\n' "Created empty ~/.ssh/config.local. Add your hosts using ~/.ssh/config.local.example as a guide."
 fi
 
 chmod 700 "$HOME/.ssh"
