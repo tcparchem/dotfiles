@@ -70,12 +70,12 @@ Install-WingetPackage -Id 'Git.Git'
 Install-WingetPackage -Id 'Microsoft.PowerShell'
 Install-WingetPackage -Id 'Microsoft.WindowsTerminal'
 Install-WingetPackage -Id 'Starship.Starship'
+Install-WingetPackage -Id 'DEVCOM.JetBrainsMonoNerdFont'
 Install-WingetPackage -Id 'JesseDuffield.lazygit'
 Install-WingetPackage -Id 'ajeetdsouza.zoxide'
 
 Ensure-PackageManagement
 Install-ModuleIfMissing -Name 'Terminal-Icons'
 Install-ModuleIfMissing -Name 'PSFzf'
-Write-Host 'Using built-in Cascadia Mono; no Nerd Fonts install is required.'
 
 & (Join-Path $PSScriptRoot 'install-windows.ps1')

@@ -29,7 +29,20 @@ powershell -ExecutionPolicy RemoteSigned -File .\scripts\bootstrap-windows.ps1
 
 That one command installs the Windows tools and modules, applies the tracked PowerShell profile, Windows Terminal settings, the shared SSH config, and `AGENTS.md`.
 If `winget` is missing, install App Installer once and rerun the same command.
-The Starship prompt uses Nerd Font glyphs. The macOS Brewfile installs the JetBrains Mono family expected by Ghostty; Windows Terminal expects the `CaskaydiaMono NFM` family.
+The Starship prompt uses Nerd Font glyphs, so a Nerd Font is required.
+Both platforms use JetBrainsMono Nerd Font: the Brewfile installs it for Ghostty, and the Windows bootstrap installs `DEVCOM.JetBrainsMonoNerdFont` for Windows Terminal (font face `JetBrainsMono NFM`).
+
+### Windows, prompt only (keep your own profile and aliases)
+
+The bootstrap above replaces your PowerShell profile (with a backup). To keep your own profile, for example on a work machine, install only the Starship prompt, theme, and font:
+
+```powershell
+powershell -ExecutionPolicy RemoteSigned -File .\scripts\install-prompt-windows.ps1 -AddToProfile
+```
+
+- Your profile only gets a small marked Starship init block appended. Windows Terminal settings, SSH config, and `AGENTS.md` are untouched.
+- Omit `-AddToProfile` to print the block instead. Add `-SkipInstall` if `winget` is unavailable.
+- Then set your terminal font face to `JetBrainsMono NFM`.
 
 ## Windows SSH
 
