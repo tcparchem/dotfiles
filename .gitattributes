@@ -1,0 +1,3 @@
+# Keep LF in the repo and in checkouts on every platform so the zsh files and
+# shell scripts still work when a Windows checkout is copied to macOS or WSL.
+* text=auto eol=lf

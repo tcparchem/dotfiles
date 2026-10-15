@@ -13,6 +13,7 @@ copy_from_home() {
 copy_from_home "$HOME/.zshrc" "$repo_root/shell/zsh/.zshrc"
 copy_from_home "$HOME/.config/dotfiles/zsh/prompt.zsh" "$repo_root/shell/zsh/prompt.zsh"
 copy_from_home "$HOME/.config/dotfiles/zsh/aliases.zsh" "$repo_root/shell/zsh/aliases.zsh"
+copy_from_home "$HOME/.config/dotfiles/zsh/tools.zsh" "$repo_root/shell/zsh/tools.zsh"
 copy_from_home "$HOME/.config/dotfiles/zsh/cmux.zsh" "$repo_root/shell/zsh/cmux.zsh"
 copy_from_home "$HOME/.config/dotfiles/bin/doctor" "$repo_root/bin/doctor"
 copy_from_home "$HOME/.config/starship.toml" "$repo_root/themes/starship.toml"

@@ -73,6 +73,7 @@ Install-WingetPackage -Id 'Starship.Starship'
 Install-WingetPackage -Id 'DEVCOM.JetBrainsMonoNerdFont'
 Install-WingetPackage -Id 'JesseDuffield.lazygit'
 Install-WingetPackage -Id 'ajeetdsouza.zoxide'
+Install-WingetPackage -Id 'junegunn.fzf'
 
 Ensure-PackageManagement
 Install-ModuleIfMissing -Name 'Terminal-Icons'

@@ -16,17 +16,13 @@ check_fail() {
   failures=$((failures + 1))
 }
 
-if command -v cmux >/dev/null 2>&1; then
-  check_ok "cmux is installed"
-else
-  check_fail "cmux is missing from PATH"
-fi
-
-if command -v btop >/dev/null 2>&1; then
-  check_ok "local btop is installed"
-else
-  check_warn "local btop is not in PATH"
-fi
+for tool in cmux starship lazygit fzf zoxide; do
+  if command -v "$tool" >/dev/null 2>&1; then
+    check_ok "$tool is installed"
+  else
+    check_fail "$tool is missing from PATH (run: brew bundle --file Brewfile)"
+  fi
+done
 
 if [[ -n "${DOTFILES_BIN_DIR:-}" ]]; then
   case ":$PATH:" in
@@ -43,4 +39,3 @@ if (( failures > 0 )); then
 fi
 
 printf '\nDoctor checks passed.\n'
-

@@ -21,6 +21,7 @@ backup_and_copy() {
 backup_and_copy "$repo_root/shell/zsh/.zshrc" "$HOME/.zshrc"
 backup_and_copy "$repo_root/shell/zsh/prompt.zsh" "$HOME/.config/dotfiles/zsh/prompt.zsh"
 backup_and_copy "$repo_root/shell/zsh/aliases.zsh" "$HOME/.config/dotfiles/zsh/aliases.zsh"
+backup_and_copy "$repo_root/shell/zsh/tools.zsh" "$HOME/.config/dotfiles/zsh/tools.zsh"
 backup_and_copy "$repo_root/shell/zsh/cmux.zsh" "$HOME/.config/dotfiles/zsh/cmux.zsh"
 backup_and_copy "$repo_root/bin/doctor" "$HOME/.config/dotfiles/bin/doctor"
 backup_and_copy "$repo_root/themes/starship.toml" "$HOME/.config/starship.toml"

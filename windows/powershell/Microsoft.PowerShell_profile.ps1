@@ -1,3 +1,4 @@
+# Optional folder of portable tools (for example fzf.exe). Ignored when absent.
 $script:TerminalToolsBin = Join-Path $HOME 'OneDrive\Documents\TerminalTools\bin'
 if (Test-Path $script:TerminalToolsBin) {
     $env:Path = "$script:TerminalToolsBin;$env:Path"
@@ -11,6 +12,10 @@ function croot {
     Set-Location 'C:\Code'
 }
 
+function dotfiles {
+    Set-Location 'C:\Code\dotfiles'
+}
+
 # PSReadLine configuration
 if (-not [Console]::IsOutputRedirected) {
     Set-PSReadLineOption -PredictionSource HistoryAndPlugin
@@ -22,7 +27,7 @@ Set-PSReadLineOption -HistoryNoDuplicates
 Set-PSReadLineOption -HistorySearchCursorMovesToEnd
 Set-PSReadLineKeyHandler -Key Tab -Function MenuComplete
 
-# Ctrl+r fuzzy history search
+# Ctrl+r reverse history search
 Set-PSReadLineKeyHandler -Chord Ctrl+r -Function ReverseSearchHistory
 
 # Better colors

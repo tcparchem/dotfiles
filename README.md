@@ -1,13 +1,20 @@
 # Dotfiles
 
-Dotfiles for keeping terminal setup consistent across machines.
-Machine-specific zsh overrides are kept out of the repo in `~/.zshrc.local`.
+Terminal setup kept consistent across machines: zsh, Ghostty, and cmux on macOS, and PowerShell 7 and Windows Terminal on Windows, all sharing one Starship prompt theme.
 
-## What's here
+## Layout
 
-- macOS/Linux shell, Ghostty, cmux, and helper scripts
-- Windows PowerShell 7, Windows Terminal, and install automation
-- small local override examples
+| Path | What it is |
+|---|---|
+| `themes/starship.toml` | Starship prompt theme, shared by macOS and Windows |
+| `shell/zsh/` | zsh config: `.zshrc`, prompt, aliases, tool init (zoxide, fzf), cmux helpers |
+| `ghostty/`, `cmux/` | Ghostty and cmux config (macOS) |
+| `windows/powershell/` | Tracked PowerShell 7 profile |
+| `windows/terminal/` | Windows Terminal settings export |
+| `bin/doctor` | macOS health check for the tools and PATH |
+| `scripts/` | Installers and sync scripts, one per platform |
+| `examples/` | Templates for untracked local overrides |
+| `Brewfile` | macOS packages, casks, and the Nerd Font |
 
 ## Install
 
@@ -15,9 +22,11 @@ Machine-specific zsh overrides are kept out of the repo in `~/.zshrc.local`.
 
 ```sh
 brew bundle --file Brewfile
-bash scripts/install.sh
+bash scripts/install-macos.sh
 source ~/.zshrc
 ```
+
+Run `doctor` afterwards to check the setup.
 
 ### Windows
 
@@ -29,8 +38,6 @@ powershell -ExecutionPolicy RemoteSigned -File .\scripts\bootstrap-windows.ps1
 
 That one command installs the Windows tools and modules and applies the tracked PowerShell profile and Windows Terminal settings.
 If `winget` is missing, install App Installer once and rerun the same command.
-The Starship prompt uses Nerd Font glyphs, so a Nerd Font is required.
-Both platforms use JetBrainsMono Nerd Font: the Brewfile installs it for Ghostty, and the Windows bootstrap installs `DEVCOM.JetBrainsMonoNerdFont` for Windows Terminal (font face `JetBrainsMono NFM`).
 
 ### Windows, prompt only (keep your own profile and aliases)
 
@@ -44,16 +51,24 @@ powershell -ExecutionPolicy RemoteSigned -File .\scripts\install-prompt-windows.
 - Omit `-AddToProfile` to print the block instead. Add `-SkipInstall` if `winget` is unavailable.
 - Then set your terminal font face to `JetBrainsMono NFM`.
 
-## Notes
+## Font
 
-- `windows/powershell/Microsoft.PowerShell_profile.ps1` is the tracked PowerShell 7 profile.
-- `themes/starship.toml` is the shared Starship prompt configuration.
-- `windows/terminal/settings.json` is the tracked Windows Terminal export.
-- The profile includes `lg` for `lazygit` and `croot` for `C:\Code`.
-- `zsh`, `Ghostty`, and `cmux` are not meant for native Windows.
+The Starship theme uses Nerd Font glyphs, so a Nerd Font is required. Both platforms use JetBrainsMono Nerd Font:
 
-## Local Overrides
+- macOS: installed by the Brewfile and used by Ghostty.
+- Windows: installed by the bootstrap (`DEVCOM.JetBrainsMonoNerdFont`) and used by Windows Terminal as font face `JetBrainsMono NFM`.
 
-- `~/.zshrc.local`
+## Shared commands
 
-An example lives in [examples](./examples).
+Both shells provide `lg` (lazygit), `croot` (go to your code folder), and `dotfiles` (go to this repo), plus zoxide (`z`) and fzf key bindings.
+
+## Local overrides
+
+Machine-specific zsh settings go in `~/.zshrc.local`, which is not tracked. See [examples/zshrc.local.example](examples/zshrc.local.example).
+
+## Maintenance
+
+- `scripts/sync-from-home.sh` copies your live macOS config from `$HOME` back into the repo.
+- Installers back up anything they replace as `*.bak.<timestamp>`, which is git-ignored.
+- The PowerShell profile contains a block managed by the coreutils installer (marked `DO NOT MODIFY`). Leave it as is; it does nothing when coreutils is not installed.
+- `zsh`, Ghostty, and cmux are not meant for native Windows.
