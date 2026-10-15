@@ -5,8 +5,8 @@
 
 .DESCRIPTION
     For machines where you keep your own PowerShell profile and aliases (for
-    example a work machine). This script never replaces your profile, Windows
-    Terminal settings, SSH config, or AGENTS.md. It only:
+    example a work machine). This script never replaces your profile or your
+    Windows Terminal settings. It only:
 
       1. Installs Starship and the JetBrainsMono Nerd Font with winget.
       2. Copies themes/starship.toml to ~/.config/starship.toml (with backup).

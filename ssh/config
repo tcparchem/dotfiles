@@ -1,9 +1,0 @@
-# Shared SSH defaults only. Host names, addresses, and users are machine-specific
-# and live in ~/.ssh/config.local, which is not tracked.
-# See examples/ssh-config.local.example for the macmini and macmini-lan entries.
-Include ~/.ssh/config.local
-
-Host *
-  ServerAliveInterval 20
-  ServerAliveCountMax 2
-  TCPKeepAlive yes

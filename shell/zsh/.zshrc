@@ -11,8 +11,7 @@ esac
 for file in \
   "$DOTFILES_ZSH_DIR/prompt.zsh" \
   "$DOTFILES_ZSH_DIR/aliases.zsh" \
-  "$DOTFILES_ZSH_DIR/cmux.zsh" \
-  "$DOTFILES_ZSH_DIR/machines.zsh"
+  "$DOTFILES_ZSH_DIR/cmux.zsh"
 do
   if [[ -r "$file" ]]; then
     source "$file"

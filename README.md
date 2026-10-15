@@ -1,13 +1,13 @@
 # Dotfiles
 
 Dotfiles for keeping terminal setup consistent across machines.
-Machine-specific details (SSH hosts, addresses, usernames) are kept out of the repo in `~/.ssh/config.local` and `~/.zshrc.local`.
+Machine-specific zsh overrides are kept out of the repo in `~/.zshrc.local`.
 
 ## What's here
 
-- macOS/Linux shell, SSH, Ghostty, cmux, and helper scripts
+- macOS/Linux shell, Ghostty, cmux, and helper scripts
 - Windows PowerShell 7, Windows Terminal, and install automation
-- shared `AGENTS.md` plus small local override examples
+- small local override examples
 
 ## Install
 
@@ -27,7 +27,7 @@ For any Windows machine:
 powershell -ExecutionPolicy RemoteSigned -File .\scripts\bootstrap-windows.ps1
 ```
 
-That one command installs the Windows tools and modules, applies the tracked PowerShell profile, Windows Terminal settings, the shared SSH config, and `AGENTS.md`.
+That one command installs the Windows tools and modules and applies the tracked PowerShell profile and Windows Terminal settings.
 If `winget` is missing, install App Installer once and rerun the same command.
 The Starship prompt uses Nerd Font glyphs, so a Nerd Font is required.
 Both platforms use JetBrainsMono Nerd Font: the Brewfile installs it for Ghostty, and the Windows bootstrap installs `DEVCOM.JetBrainsMonoNerdFont` for Windows Terminal (font face `JetBrainsMono NFM`).
@@ -40,59 +40,20 @@ The bootstrap above replaces your PowerShell profile (with a backup). To keep yo
 powershell -ExecutionPolicy RemoteSigned -File .\scripts\install-prompt-windows.ps1 -AddToProfile
 ```
 
-- Your profile only gets a small marked Starship init block appended. Windows Terminal settings, SSH config, and `AGENTS.md` are untouched.
+- Your profile only gets a small marked Starship init block appended. Windows Terminal settings are untouched.
 - Omit `-AddToProfile` to print the block instead. Add `-SkipInstall` if `winget` is unavailable.
 - Then set your terminal font face to `JetBrainsMono NFM`.
-
-## Windows SSH
-
-After the Windows bootstrap finishes:
-
-Define the `macmini` and `macmini-lan` hosts in `~/.ssh/config.local` first, using `~/.ssh/config.local.example` as a guide.
-
-1. Create a key if you do not already have one.
-
-```powershell
-ssh-keygen -t ed25519 -f $HOME\.ssh\id_ed25519_macmini -C "windows@$env:COMPUTERNAME"
-```
-
-2. Copy the public key to the Mac so logins no longer ask for your account password.
-
-```powershell
-Get-Content $HOME\.ssh\id_ed25519_macmini.pub | ssh macmini 'umask 077; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys'
-Get-Content $HOME\.ssh\id_ed25519_macmini.pub | ssh macmini-lan 'umask 077; mkdir -p ~/.ssh; cat >> ~/.ssh/authorized_keys'
-```
-
-3. Optional but recommended: start the local ssh-agent and load the key once.
-
-```powershell
-Set-Service ssh-agent -StartupType Automatic
-Start-Service ssh-agent
-ssh-add $HOME\.ssh\id_ed25519_macmini
-```
-
-If `Set-Service` says access is denied, run that one command in an elevated PowerShell once.
-
-## How to use it
-
-- `mmini` opens an SSH shell to `macmini`.
-- `mmon` opens `btop` on `macmini` in a forced TTY.
-- `mmlan` opens an SSH shell to `macmini-lan`.
-- `ssh macmini` still works if you want raw SSH access.
-- The first connection may ask you to trust the host key. Type `yes` once and it will be remembered.
 
 ## Notes
 
 - `windows/powershell/Microsoft.PowerShell_profile.ps1` is the tracked PowerShell 7 profile.
 - `themes/starship.toml` is the shared Starship prompt configuration.
 - `windows/terminal/settings.json` is the tracked Windows Terminal export.
-- The profile includes `lg` for `lazygit`, `croot` for `C:\Code`, and the `mmini`/`mmon`/`mmlan` SSH helpers.
+- The profile includes `lg` for `lazygit` and `croot` for `C:\Code`.
 - `zsh`, `Ghostty`, and `cmux` are not meant for native Windows.
-- `AGENTS.md` is shared from the repo copy.
 
 ## Local Overrides
 
 - `~/.zshrc.local`
-- `~/.ssh/config.local`
 
-Examples live in [examples](./examples).
+An example lives in [examples](./examples).
